@@ -1,10 +1,13 @@
-export class MenuPage extends HTMLElement {
+export default class MenuPage extends HTMLElement {
   constructor() {
     super();
 
     this.root = this.attachShadow({ mode: "open" });
 
+    const template = document.getElementById("menu-page-template");
+    const content = template.content.cloneNode(true);
     const styles = document.createElement("style");
+    this.root.appendChild(content);
     this.root.appendChild(styles);
 
     async function loadCSS() {
@@ -15,28 +18,24 @@ export class MenuPage extends HTMLElement {
     loadCSS();
   }
   connectedCallback() {
-    const template = document.getElementById("menu-page-template");
-    const content = template.content.cloneNode(true);
-    this.root.appendChild(content);
-
+    this.render();
     window.addEventListener("menuChange", () => {
-      // renders when listen change in menu
       this.render();
     });
   }
   render() {
     if (app.store.menu) {
-      console.log(app.store.menu);
+      this.root.querySelector("#menu").innerHTML = "";
+      // console.log(app.store.menu);
       for (let items of app.store.menu) {
         const liCategory = document.createElement("li");
         liCategory.innerHTML = `
         <h3>${items.name}</h3>
         <ul class="category">
-        
         </ul>
         `;
         this.root.querySelector("#menu").appendChild(liCategory);
-        items.products.forEach((product) => {
+        items.products.map((product) => {
           const item = document.createElement("product-item");
           item.dataset.product = JSON.stringify(product);
           liCategory.querySelector("ul").appendChild(item);

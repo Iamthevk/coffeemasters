@@ -14,5 +14,8 @@ const proxiedStore = new Proxy(Store, {
     }
     return true;
   },
+  get(target, property) {
+    return target[property];
+  },
 });
 export default proxiedStore;
