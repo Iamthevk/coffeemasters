@@ -16,10 +16,9 @@ export default class ProductItem extends HTMLElement {
     this.querySelector("p.price").textContent = `$${product.price.toFixed(2)}`;
     this.querySelector("img").src = `data/images/${product.image}`;
     this.querySelector("a").addEventListener("click", (event) => {
-      console.log(event.target.tagName);
+      this.lastElementChild.lastElementChild.children[1].lastElementChild.style.cursor =
+        "pointer";
       if (event.target.tagName.toLowerCase() == "button") {
-        // console.log("clicked");
-        this.style.cursor = "pointer";
         addToCart(product.id);
       } else {
         app.router.go(`/product-${product.id}`);
