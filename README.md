@@ -17,7 +17,7 @@ A project with vanilla JS using Web Components
 
 3. Download live server extension on VS code:
 
-- Open project and click to Go Live from the status bar to turn the server on/off. Go Live Control Preview
+- Open project and click to Go Live from the status bar to turn the server on/off.
 
 - Right click on a HTML file from Explorer Window and click on Open with Live Server.
 
